@@ -1,7 +1,7 @@
 # FM-ERSoS-Model-Verification-from-HSF-driven-Models
 
 
- ************** Fire Monitoring and Emergency Response SoS (FM-ERSoS)  model checking from architectual specificaiton ********************
+ ********** Fire Monitoring and Emergency Response SoS (FM-ERSoS)  model checking from architectual specificaiton **********
 
 Open PRISM and press Model tab and then Open Model
 
@@ -18,9 +18,9 @@ Deadlock and liveliness
 4) Calcualte steady state probabilities without properties 
 5) Check transition rewards and state rewards 
 
-************* See the model how varsious contraints in relation to the SoS Architecture are applied ****************
+********** See the model how varsious contraints in relation to the SoS Architecture are applied **********
 
-********* Experimentation of CTMC FM-ERSoS Models ************
+********** Experimentation of CTMC FM-ERSoS Models **********
 
 1) load the model first by following above steps 
 2 ) load properites file in CSL  that you have downloaded 
