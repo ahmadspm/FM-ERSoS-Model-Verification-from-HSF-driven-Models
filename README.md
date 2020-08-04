@@ -15,7 +15,7 @@ Deadlock and liveliness
 1) Download the model files and properties files first 
  Select the model FMERSoS from Model and then click open Model 
 2) Then load the model and click on load model by click sub-tab withn Model Menu
-3)Check States, Transitions and intial states of CSs within Model 
+3) Check States, Transitions and intial states of CSs within Model 
 4) Calcualte steady state probabilities without properties 
 5) Check transition rewards and state rewards 
 
