@@ -1,0 +1,164 @@
+const double T;
+
+P>=0.75 [ (sa=1)|(sa=2) U[0,T] sb=2 ]
+
+P<=0.55 [ (sa=1)|(sa=2) U[0,T] sa=3 ]
+
+// The Likelihood of exchange of data if one of the CPS is not able to reach the state (R1)
+P=? [ F<=T !(sa=3)&(sb=5) ]
+
+// The likelihood of reaching the CPS states when no data is sent in future time T units (Reliability R1] 
+P=? [ F<=T !(sc=2)&(sa=2) ]
+
+// The likelihood of reaching the CPS states when no data is sent in future time T units (Reliability R1]
+P=? [ F<=T !(sc=2)&(sb=2) ]
+
+// The likelihood of reaching the CPS states when no data is sent in future time T units (Reliability R1]
+P=? [ F<=T (sa=3)&(sb=5) ]
+
+// CPSWHF & CPSCLS(N=15, T=20] T*3600
+P=? [ F<=T*3600 !(sa=3)&(sc=2) ]
+
+// CPSFS & CPSCLS(N=15, T=20] T*3600
+P=? [ F<=T*3600 !(sb=3)&(sc=2) ]
+
+// probability that somoke and firedata are delivered to local control station within first 10 senods is greater than 0.90
+P>=0.9 [ F[0,T] sa=3 ]
+
+// Fire data will be sent to ECU (LCS) from cps nodes sensors in less than 70 seconds with a proability greater than 0.80 with more than 50% success chances.  
+P>=0.50 [ sa=1|sb=2 U<=T sc=2 ]
+
+// At least 98% of IoT sensing nodes shall detect the fire has occurred at most 2 seconds of the time the data has been captured
+P>=0.55 [ sa=2 U<=T sa<3 ]
+
+P=? [ !sa=1 U<=T sa=3 ]
+
+// The probability mision M1 is completed in time T units
+P=? [ F<=T "Mission_M1_G1_Achieved" ]
+
+S=? [ sa=3&sb=4 ]
+
+S=? [ sa=3|sb=4 ]
+
+S=? [ !(sa=3&sb=4) ]
+
+// probaility that sensor data will be sent to CPSCLS node in next Time units T
+P=? [ F<=T (sa=3&sb=4) ]
+
+// probability that CPLCS will be able to get sensor data with 70 time units even if one of CPSWHF gets disabled . 
+P>0.50 [ !(sa=3) U<=70 sc=1 ]
+
+// There are 60 % chanes that both the CPS will continue working in future
+P>=0.60 [ F (sa=3)&(sb=4) ]
+
+// There is more than 50% liklihood that CPSCLS may not able to send alert messages to ECU 
+P>0.50 [ F !sc=3 ]
+
+// The proabibility that if CPSHWF is unable to send that still CPSECU will be generating alerts in Time units T.
+P=? [ !(sa=3) U<=T sd=3 ]
+
+// The proabibility that if CPSFS is unable to send that still CPSECU will be generating alerts in Time units T.
+P=? [ !(sb=4) U<=T sd=3 ]
+
+// The probability that CPSHWF and CPSFS will be sending sensor data to CPSCLS within in Time T units.
+P=? [ F<=T (sa=3)&(sb=4) ]
+
+// probability of CPSFS & CPSCSL transmitting data once reciived from sensors within Time units T
+P=? [ F<=T (sb=4)&(sc=5) ]
+
+// proabability that CPSCSL and CPSECU will be able to generate alerts within Time T units
+P=? [ F<=T (sc=5)&(sd=3) ]
+
+// CPSFS & CPSLCS
+P=? [ F<=T (sb=5)&(sc=4) ]
+
+P=? [ !(sc=2) U<=T sd=4 ]
+
+// Probability of Mission2 is achieved within T units T
+P=? [ F<=T "Mission_M1_G2_Achieved" ]
+
+// Probability of Mission M2 achieved
+P=? [ F<=T "Mission_M2_Achieved" ]
+
+P=? [ F<=T "Mission_M1_G1_Achieved"&"Mission_M2_Achieved" ]
+
+P=? [ F<=T !(sd=3)&(sc=5) ]
+
+S=? [ "Mission_M1_G2_Achieved" ]
+
+// Max liklihood that CPSFS  keeps sending data and CPSLCS keeps recieving sensors data without failures in T hours
+Pmax=? [ F<=T*3600 sc=2 ]
+
+P>=0.60 [ F (sa=3)&(sb=4) ]
+
+P>0.50 [ F !sc=3 ]
+
+P>0.50 [ !(sa=3) U<=70 sc=1 ]
+
+Pmax=? [ F<=T*3600 sa=2 ]
+
+Pmax=? [ F<=T*3600 sd=4 ]
+
+P=? [ !(sa=2) U<=T sd=4 ]
+
+P=? [ (sa=0) U<=T sd=4 ]
+
+P=? [ (sb=1) U<=T sd=4 ]
+
+P=? [ (sa=0) U<=T sc=2 ]
+
+P=? [ !(sa=2) U<=T sb=2 ]
+
+P=? [ !(sc=5) U<=T (sd=3) ]
+
+S=? [ sa=4 ]
+
+// Long run probability of CPSLCS is not able to recieve sensors data
+S=? [ !(sc=2) ]
+
+// Long run probability of sending alerts to ECU
+S=? [ sc=5 ]
+
+P=? [ sa!=2 U<=T sc=2 ]
+
+// sos failure modeling
+P=?[!sos_fails U <=T sos_failing]
+
+// Individual CSs failure with SoS failure [ From Emebdded systems modeling CTMC case study]
+P=?[!sos_fails U<= T CPSHWF_FAILS]
+
+P=?[!sos_fails U <= T CPSFS_FAILS]
+
+P=?[!sos_fails U <= T CPSLCS_Fails]
+
+P=?[!"SoS_failed" U <=T "CPHWF_FAILED"]
+
+// probability of failure for T NEXT HOURS
+P=?[F<= T * 3600 "CPHWF_FAILED" ]
+
+P=?[F<=T "SoS_failed"] 
+
+P=?[F<=T !"CPHWF_FAILED"]
+
+R{"SoS_NOTFAILED"}=?[C<=T]
+
+R{"CPSHWF_CPSFS_Failed"}=?[C<=T]
+
+R{"sosfails"}=?[C<=T]
+
+R{"CPSLCS_fails"}=?[C<=T]
+
+R{"ECU_fails"}=?[C<=T]
+
+// Proabability that HWF will fail first in time unit T.
+P=?["SoS_notfailed"  U<=T "CPHWF_FAILED"]
+
+// Chances that sos will fail within time unit T
+P=?[true U<=T*3600 "SoS_failed"]
+
+P=?[F<=T "ECU_failed"]
+
+P=?[true U <=T CPSLCS_Fails]
+
+P=?[!sos_fails U <=T*3600 CPSLCS_Fails]
+

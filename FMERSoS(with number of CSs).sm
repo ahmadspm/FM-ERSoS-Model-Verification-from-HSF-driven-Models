@@ -1,0 +1,152 @@
+// FM-ERSoS CTMC MODEL stochastic  action rates between CSs --> (CPS-IoT nodes) (local gateways) (ECU)
+// and First Responders 
+ctmc 
+// Parcipating Architectural elements in a particular Mission M and configuration 
+
+const int N; 
+
+// Stochastic Action reates as Transition Rates (Tr). 
+
+//global op: bool;
+
+const double  tr1 = 0.50; // rate for humidity measure
+const double  tr2 = 0.75; // rate of windflow measure
+const double  tr3=  0.85; //  rate of flamedetection  
+const double  tr4= 1.00; // rate of somoke detection
+
+
+const double  tr5 = 4.5; // rate of sending sensors data CPSHWF
+const double  tr6 = 5.5; // rate of recienving sensors data CPSHWF
+const double  tr7 = 6.5; // rate of cocurreent action (Tell)
+const double  tr8 = 7.00; // rate of concurrent action (Ask)
+
+const double tr9 = 7.5;// rate of sending Sensor data to ECU
+const double tr10 = 8.5;// rate of sending Alarts&Warnings to ECU
+
+const double tr11= 10.5; //rate of sending alerts to First Emergency Responders
+
+const double tr12 = 12.00; // rate of sending warning messages to population and First Emgergncy Responders
+
+const double tr13= 5.0; // sending from CPSFS
+const  double tr14 = 6.00; // rate of receving in CPSFS
+const double tr15 = 8.00;// rate of reciving data to CPSLCS gateway
+
+
+
+// system  non-deterministic stochatic behavior. 
+module CPSHWF
+// possible number of states 
+sa:[0..5] init 0 ;
+
+[] sa>=0 -> tr1: (sa'=1); // get humidity data 
+[] sa>=0 -> tr2: (sa'=2); // get windflow data 
+[sendsensordata] sa=1   -> tr5: (sa'=3); // interact 
+[recievesensordata] sa=2 -> tr6:(sa'=4);   // interact
+[askaboutlocation] sa=4  -> tr8 :(sa'=5); // interact
+[] sa>1 -> sa*tr6: (sa'=sa-1); // At point in time exchange of information may fail.  
+
+
+// states transitions with actions 
+endmodule 
+
+module CPSFS
+// possible number of states 
+
+sb:[1..6] init 1 ;
+
+[] sb>=1 -> tr3: (sb'=2); // get fire data  (This is optional to show the working of CPS-node)
+[] sb>=1  -> tr4: (sb'=3); // get smoke data
+[sendsensordata] sb=2  -> tr13: (sb'=4); // interact
+[recievesensordata] sb=3 -> tr14: (sb'=5); // interact
+[tellaboutlocation]  sb= 5 -> tr7 :(sb'=6); // interct (may need similar action)
+
+[] sb>2 -> sb*tr6:(sb'=sb-1);  // At point in time exchange of information may fail.
+endmodule 
+
+
+module CPSLCS // Local control station Gateway
+sc: [1..6] init 1;
+[recievedata] sc=1 -> tr15: (sc'=2);    // Inteact recivesensordata
+[]  (sc= 2 & sa =4) | (sc= 2 & sb=4) -> tr5 :(sc'=3);  // process inital sensor data from CPS- nodes 
+[] (sa= 4 | sb =5) -> tr5:(sc'=4); // do action for prediction of fire 
+[transmitdatatoECU] sc= 2 -> tr9: (sc'= 5);
+[sendalertstoECU] sc=3 -> tr10: (sc' =6);
+// states transitions with actions 
+endmodule 
+
+
+module CPSECU
+// possible number of states 
+sd: [1..4] init 1 ;
+[recievedata] sd= 1  ->tr3 : (sd'=2); // interact 
+
+[generatealerts] sd=2 -> tr11: (sd'=3);
+[genertewarnings]  sd=2 -> tr12: (sd'=4);
+// states transitions with actions
+
+endmodule 
+
+
+
+rewards "getdata"
+
+[recievedata] true: 1;
+endrewards
+
+label "Mission_M1_Achieved" = sc=5;
+
+label "CPSHWF_may_degrade" = sa= 0;
+
+label "CPSFS_may_degrade" = sb= 1;
+
+//module policeservice
+// possible number of states 
+
+// states transitions with actions
+//endmodule 
+
+//module EmeergencyService 
+// possible number of states 
+
+// states transitions with actions
+//endmodule 
+
+//module FireFirghtingService 
+// possible number of states 
+
+// states transitions with actions
+//endmodule 
+
+// Final states of the configurations representing mission accomplishmnets 
+
+//module Mission finalstates 
+
+
+//endmodule 
+
+
+// 
+//labels 
+
+// formulas 
+
+
+
+//rewards "timeforsending alerts"
+
+//endrewards 
+
+//rewards "timeforsending alerts"
+
+//endrewards 
+
+//rewards "timeforsending alerts"
+
+//endrewards 
+//rewards "timeforsending alerts"
+
+//endrewards 
+
+
+
+
