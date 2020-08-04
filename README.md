@@ -7,8 +7,9 @@ Open PRISM and press Model tab and then Open Model
 
 Model Capabilities 
 
-Steady state analysis 
+Steady-state Analysis 
 Transient Anaysis
+Known bounds and unkown bounds
 Deadlock and liveliness 
 
 1) Download the model files and properties files first 
@@ -22,10 +23,10 @@ Deadlock and liveliness
 
 ********** Experimentation of CTMC FM-ERSoS Models **********
 
-1) load the model first by following above steps 
-2 ) load properites file in CSL  that you have downloaded 
-3) Star experimentaitons with properties specification one by one 
-4) Evaluate steady state probabilities with properties in experiments 
-5) Evalualte Transient probabilities to measure Performance and Reliability of FM-ERSoS
+1) Load the model first by following above steps 
+2) Load properites file in CSL  that you have downloaded 
+3) Start experimentaitons with properties specification one by one 
+4) Evaluate steady state liklihoods with properties in experiments 
+5) Evalualte Transient liklihoods to measure Performance and Reliability of FM-ERSoS
 
 
