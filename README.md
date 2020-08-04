@@ -1,7 +1,7 @@
 # FM-ERSoS-Model-Verification-from-HSF-driven-Models
 
 
- ************** Fine Monitoroing and Emergency Response SoS (FM-ERSoS)  model checking from architectual specificaiton ********************
+ ************** Fire Monitoring and Emergency Response SoS (FM-ERSoS)  model checking from architectual specificaiton ********************
 
 Open PRISM and press Model tab and then Open Model
 
