@@ -19,10 +19,16 @@ Deadlock and liveliness
  Select the model FMERSoS from Model and then click open Model 
 2) Then load the model and click on load model by click sub-tab withn Model Menu
 3) Check States, Transitions and intial states of CSs within Model 
-4) Calcualte steady state probabilities without properties 
+4) Calcualte steady state probabilities with known bonds and unkonwn bounds 
 5) Check transition rewards and state rewards 
+6) Change the model parameters as per needs 
+7) you can test multiple models seperately for experimentation of complex system stochastic behavior analsis
+9) Feel free to modify the models as per needs 
+10) Models can be modified considering the Real-Time System needs in the domains of Complex Systems (Smart Cities consisting of  IoTs,Cyber-Physical SoS, smart grids, Critical Infrastructure) where Software Components are main drivers with operational and managerial indpendence. 
 
-******* See the model how varsious contraints in relation to the SoS Architecture are applied *******
+11) Performance and Reliability metrics and sub-metrics are calculated with SoS stochastic system dynamics, hower other core Quality Attributes such as Security, Availibility could be evaluated with contextual modifications in models and properites. 
+
+******* See the model how varsious constraints in relation to the SoS Architecture are applied *******
 
 ********** Experimentation of CTMC FM-ERSoS Models **********
 
