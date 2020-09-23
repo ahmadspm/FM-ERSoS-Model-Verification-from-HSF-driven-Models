@@ -1,3 +1,5 @@
+// Properties specifications designed in evolutionary method 
+// Properties specifications have certain constraints to be evaluated in experiments for Real-Time Complex Systems
 const double T;
 
 P>=0.75 [ (sa=1)|(sa=2) U[0,T] sb=2 ]
