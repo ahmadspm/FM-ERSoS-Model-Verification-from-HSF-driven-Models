@@ -3,6 +3,10 @@
 
 # FM-ERSoS-Model-Verification-from-HSF-driven-Models
 
+A. Mohsin, N. K. Janjua, S. M. S. Islam and M. A. Babar, "SAM-SoS: A Stochastic Software Architecture Modeling and Verification Approach for Complex System-of-Systems," in IEEE Access, vol. 8, pp. 177580-177603, 2020, doi: 10.1109/ACCESS.2020.3025934.
+
+
+
 
  ******* Fire Monitoring and Emergency Response SoS (FM-ERSoS) model checking from architectual specificaiton *******
 
